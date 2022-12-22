@@ -9,4 +9,9 @@ abstract class LoginCommandModule {
     @IntoMap
     @StringKey("login")
     abstract Command loginCommand(LoginCommand command);
+
+    @Binds
+    @IntoMap
+    @StringKey("logout")
+    abstract Command logoutCommand(LogoutCommand command);
 }
