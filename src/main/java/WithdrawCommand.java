@@ -26,6 +26,7 @@ final class WithdrawCommand extends BigDecimalCommand {
     public void handleAmount(BigDecimal amount) {
         if (amount.compareTo(maximumWithdrawal) > 0) {
             // output error
+            outputter.output("amount.compareTo(maximumWithdrawal) > 0");
             return;
         }
 
@@ -33,6 +34,7 @@ final class WithdrawCommand extends BigDecimalCommand {
         BigDecimal newBalance = account.balance().subtract(amount);
         if (newBalance.compareTo(minimumBalance)< 0) {
             // output error
+            outputter.output("newBalance.compareTo(minimumBalance)< 0");
             return;
         } else {
             account.withdraw(amount);
