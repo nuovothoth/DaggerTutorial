@@ -2,6 +2,7 @@ import dagger.BindsInstance;
 import dagger.Module;
 import dagger.Subcomponent;
 
+@PerSession
 @Subcomponent(modules = {UserCommandsModule.class})
 interface UserCommandsRouter {
     CommandRouter router();

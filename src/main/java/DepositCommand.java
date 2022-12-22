@@ -3,20 +3,23 @@ import java.math.BigDecimal;
 import java.util.List;
 
 final class DepositCommand extends BigDecimalCommand {
-    private final Database.Account account;
     private final Outputter outputter;
+    private final Database.Account account;
+    private final WithdrawalLimiter withdrawalLimiter;
 
     @Inject
-    DepositCommand(Database.Account account, Outputter outputter) {
+    DepositCommand(Outputter outputter, Database.Account account, WithdrawalLimiter withdrawalLimiter) {
         super(outputter);
         System.out.println("Creating a new " + this);
-        this.account = account;
         this.outputter = outputter;
+        this.account = account;
+        this.withdrawalLimiter = withdrawalLimiter;
     }
 
     @Override
-    public void handleAmount(BigDecimal amount) {
+    protected void handleAmount(BigDecimal amount) {
         account.deposit(amount);
-        outputter.output(account.username() + " now has: " + account.balance());
+        withdrawalLimiter.recordDeposit(amount);
+        outputter.output("your new balance is: " + account.balance());
     }
 }
