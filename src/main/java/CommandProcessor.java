@@ -13,24 +13,15 @@ final class CommandProcessor {
     }
 
     Command.Status process(String input) {
-        /*Command.Result result = commandRouterStack.peek().route(input);
-        if (result.status().equals(Status.INPUT_COMPLETED)) {
+        Command.Result result = commandRouterStack.peek().route(input);
+        if (result.status().equals(Command.Status.INPUT_COMPLETED)) {
             commandRouterStack.pop();
             return commandRouterStack.isEmpty()
                     ? Command.Status.INPUT_COMPLETED
                     : Command.Status.HANDLED;
         }
 
-        result.nestedCommandRouter().ifPresent(commandRouterStack::push);*/
-        Command.Status status = commandRouterStack.peek().route(input);
-        if (status.equals(Command.Status.INPUT_COMPLETED)) {
-            commandRouterStack.pop();
-            return commandRouterStack.isEmpty()
-                    ? Command.Status.INPUT_COMPLETED
-                    : Command.Status.HANDLED;
-        }
-
-        return status;
-//        return Command.Status.HANDLED;
+        result.nestedCommandRouter().ifPresent(commandRouterStack::push);
+        return result.status();
     }
 }

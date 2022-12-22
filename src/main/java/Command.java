@@ -2,9 +2,8 @@ import java.util.List;
 import java.util.Optional;
 
 public interface Command {
-    String key();
 
-    Status handleInput(List<String> input);
+    Result handleInput(List<String> input);
 
     class Result {
         private final Status status;
@@ -17,6 +16,22 @@ public interface Command {
 
         static Result enterNestedCommandSet(CommandRouter nestedCommandRouter) {
             return new Result(Status.HANDLED, Optional.of(nestedCommandRouter));
+        }
+
+        static Result invalid() {
+            return new Result(Status.INVALID, Optional.empty());
+        }
+
+        static Result handled() {
+            return new Result(Status.HANDLED, Optional.empty());
+        }
+
+        Status status() {
+            return status;
+        }
+
+        Optional<CommandRouter> nestedCommandRouter() {
+            return nestedCommandRouter;
         }
     }
 
