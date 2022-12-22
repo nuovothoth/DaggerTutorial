@@ -15,7 +15,7 @@ public class CommandLineAtm {
     }
 
     @Singleton
-    @Component(modules = {LoginCommandModule.class, SystemOutModule.class, UserCommandsRouter.InstallationModule.class})
+    @Component(modules = {LoginCommandModule.class, SystemOutModule.class, UserCommandsRouter.InstallationModule.class, AmountsModule.class})
     interface CommandProcessorFactory {
         CommandProcessor processor();
     }
