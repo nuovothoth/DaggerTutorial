@@ -30,6 +30,10 @@ public class Database {
             balance = balance.add(amount);
         }
 
+        void withdraw(BigDecimal amount) {
+            balance = balance.subtract(amount);
+        }
+
         String username() {
             return username;
         }
